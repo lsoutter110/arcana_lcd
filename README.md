@@ -10,29 +10,17 @@ For most projects, the high-level interfaces will have sufficient functionality.
 ## High-Level interface
 ### Drawing Functions
 
-`void lcd_init()`
+`void lcd_init()` - Initialises and clears the display.
 
-Initialises and clears the display.
+`void lcd_clear()` - Clears the display.
 
-`void lcd_clear()`
+`void lcd_draw_hline(x1, y1, x2, col)` - Draws a horizontal line from `(x1, y1)` to `(x2, y1)` of colour `col`.
 
-Clears the display.
+`void lcd_draw_vline(x1, y1, y2, col)`: Draws a vertical line from `(x1, y1)` to `(x1, y2)` of colour `col`.
 
-`void lcd_draw_hline(x1, y1, x2, col)`
+`void lcd_draw_rect_fill(x1, y1, x2, y2, col)`: Draws a filled rectangle from `(x1, y1)` to `(x2, y2)` of colour `col`.
 
-Draws a horizontal line from `(x1, y1)` to `(x2, y1)` of colour `col`.
-
-`void lcd_draw_vline(x1, y1, y2, col)`
-
-Draws a vertical line from `(x1, y1)` to `(x1, y2)` of colour `col`.
-
-`void lcd_draw_rect_fill(x1, y1, x2, y2, col)`
-
-Draws a filled rectangle from `(x1, y1)` to `(x2, y2)` of colour `col`.
-
-`void lcd_draw_line(x1, y1, x2, y2, col)`
-
-Draws a line from `(x1, y1)` to `(x2, y2)` using Bresenham's algorithm (slightly optimised for the ili934x display driver).
+`void lcd_draw_line(x1, y1, x2, y2, col)`: Draws a line from `(x1, y1)` to `(x2, y2)` using Bresenham's algorithm (slightly optimised for the ili934x display driver).
 
 ### Sprites
 
