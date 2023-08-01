@@ -1,6 +1,9 @@
 #include "lcd_hl.h"
 #include "lcd_util.h"
 
+#define abs(x) ((x)<0 ? -(x) : (x))
+#define absn(x) ((x)<0 ? (x) : -(x))
+
 // Drawing functions
 
 void lcd_clear() {

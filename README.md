@@ -30,7 +30,7 @@ Draws a vertical line from `(x1, y1)` to `(x1, y2)` of colour `col`.
 
 Draws a filled rectangle from `(x1, y1)` to `(x2, y2)` of colour `col`.
 
-`void draw_line(x1, y1, x2, y2, col)`
+`void lcd_draw_line(x1, y1, x2, y2, col)`
 
 Draws a line from `(x1, y1)` to `(x2, y2)` using Bresenham's algorithm (slightly optimised for the ili934x display driver).
 
