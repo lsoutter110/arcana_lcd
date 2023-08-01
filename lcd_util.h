@@ -1,39 +1,22 @@
-/*  
- * All code in this file was written by Steve Gunn
- * Licence: This work is licensed under the Creative Commons Attribution License.
- *           View this license at http://creativecommons.org/about/licenses/
- */
- 
+#pragma once
+
 #include <avr/io.h>
 #include <util/delay.h>
 
-// #ifndef PORTA
-// #define PORTA *(uint8_t*)0
-// #define PORTC *(uint8_t*)0
-// #define DDRA *(uint8_t*)0
-// #define DDRC *(uint8_t*)0
-// #endif
-
 //Port definitions
-#ifndef USE_PORT_BD
+#ifndef CTRL_PORT
+#define CTRL_PORT PORTA
+#endif
+#ifndef CTRL_DDR
+#define CTRL_DDR DDRA
+#endif
 
-#define CTRL_PORT	PORTA
-#define CTRL_DDR	DDRA
-#define CTRL_PIN	PINA
-#define DATA_PORT	PORTC
-#define DATA_DDR	DDRC
-#define DATA_PIN	PINC
-
-#else //USE_PORT_BD
-
-#define CTRL_PORT	PORTB
-#define CTRL_DDR	DDRB
-#define CTRL_PIN	PINB
-#define DATA_PORT	PORTD
-#define DATA_DDR	DDRD
-#define DATA_PIN	PIND
-
-#endif //USE_PORT_BD
+#ifndef DATA_PORT
+#define DATA_PORT PORTC
+#endif
+#ifndef DATA_DDR
+#define DATA_DDR DDRC
+#endif
 
 //Control port pins
 enum {
@@ -50,7 +33,6 @@ enum {
 //Display control instructions
 #define lcd_ctrl_lo(pin)	CTRL_PORT &= ~_BV(pin)
 #define lcd_ctrl_hi(pin)	CTRL_PORT |= _BV(pin)
-// #define lcd_data_write(x)	DATA_PORT = x
 
 // Basic Commands
 enum {
@@ -122,34 +104,6 @@ enum {
    	DATA_PORT = data; \
 	lcd_ctrl_hi(WR); \
 }
-
-#define set_pixel
-
-//used to read internal status or data
-//bro never reads?
-// #define lcd_data_r(data) \
-// { \
-// 	DATA_DDR = 0x00; \
-// 	lcd_ctrl_lo(RD); \
-// 	lcd_ctrl_hi(RD); \
-// 	data = DATA_PIN; \
-
-// }
-
-// #define lcd_data_w16(data) \
-// { \
-// 	write_data((data) >> 8); \
-// 	write_data((data) & 0xFF); \
-// }
-
-// #define write_cmd_data(cmd, ndata, data) \
-// { \
-// 	uint8_t i; \
-// 	char *d = data; \
-// 	write_cmd(cmd); \
-// 	for(i=0; i<ndata; i++) \
-// 		write_data(*d++); \
-// }
 
 //drawing macros
 #define lcd_set_col_adr(x1, x2) \

@@ -1,6 +1,56 @@
 #include "lcd_hl.h"
 #include "lcd_util.h"
 
+void lcd_init() {
+	//disable jtag
+	MCUCR |= _BV(JTD);
+	MCUCR |= _BV(JTD);
+
+	CTRL_DDR = 0x7F;
+	DATA_DDR = 0xFF;
+
+	//perform reset
+	lcd_ctrl_lo(RESET);
+	_delay_ms(50);
+	lcd_ctrl_hi(RESET);
+	_delay_ms(50);
+
+	//set default pin values
+	lcd_ctrl_hi(WR);
+	lcd_ctrl_hi(RD);
+	lcd_ctrl_hi(RS);
+	lcd_ctrl_hi(VSYNC);
+	lcd_ctrl_hi(FMARK);
+	lcd_ctrl_lo(CS);
+
+	lcd_cmd_w(LCD_DISPLAY_OFF);
+	//exit sleep
+	lcd_cmd_w(LCD_SLEEP_OUT);
+	_delay_ms(5); //wait for sleep out to finish
+
+	// ----- setup preferences -----
+
+	//set orientation
+	lcd_cmd_w(LCD_MEMORY_ACCESS_CONTROL);
+	lcd_data_w(0x48);
+
+	//set color depth to 16 bit {REG 3A : DBI[2:0] = 0b101}
+	lcd_cmd_w(LCD_PIXEL_FORMAT_SET);
+	lcd_data_w(0x55);
+
+	//clear display
+	lcd_clear();
+
+	//turn on display after reset
+	lcd_cmd_w(LCD_DISPLAY_ON);
+	_delay_ms(20);
+	
+	//enable backlight
+	lcd_ctrl_hi(BLC);
+}
+
+// Drawing functions
+
 void lcd_clear() {
 	lcd_mem_write_begin(0, 0, LCD_WIDTH-1, LCD_HEIGHT-1);
 
@@ -39,23 +89,23 @@ void lcd_draw_rect_fill(const uint8_t x1, const uint16_t y1, const uint8_t x2, c
 	lcd_mem_write_end();
 }
 
-void lcd_draw_sprite(const Sprite sprite, const uint8_t x_pos, const uint16_t y_pos) {
-	lcd_mem_write_begin(x_pos, y_pos, x_pos + sprite.w - 1, y_pos + sprite.h - 1);
+void lcd_draw_sprite(const Sprite sprite, const uint8_t x, const uint16_t y) {
+	lcd_mem_write_begin(x, y, x + sprite.w - 1, y + sprite.h - 1);
 
 	uint16_t *data_ptr = sprite.data;
-	for(uint8_t x=x_pos; x<x_pos+sprite.w; x++)
-		for(uint16_t y=y_pos; y<y_pos+sprite.h; y++)
+	for(uint8_t x_r=0; x_r<sprite.w; x_r++)
+		for(uint16_t y_r=0; y_r<sprite.h; y_r++)
 			lcd_mem_write_16(*(data_ptr++));
 	
 	lcd_mem_write_end();
 }
 
-void lcd_draw_pgmsprite(const PGMSprite sprite, const uint8_t x_pos, const uint16_t y_pos) {
-	lcd_mem_write_begin(x_pos, y_pos, x_pos + sprite.w - 1, y_pos + sprite.h - 1);
+void lcd_draw_pgmsprite(const PGMSprite sprite, const uint8_t x, const uint16_t y) {
+	lcd_mem_write_begin(x, y, x + sprite.w - 1, y + sprite.h - 1);
 
 	PGM_P data_ptr = sprite.data;
-	for(uint8_t x=x_pos; x<x_pos+sprite.w; x++)
-		for(uint16_t y=y_pos; y<y_pos+sprite.h; y++) {
+	for(uint8_t x_r=0; x_r<sprite.w; x_r++)
+		for(uint16_t y_r=0; y_r<sprite.h; y_r++) {
 			lcd_mem_write_8(pgm_read_byte(data_ptr++));
 			lcd_mem_write_8(pgm_read_byte(data_ptr++));
 		}
@@ -107,54 +157,4 @@ void lcd_draw_rgb_triangle(const uint16_t x, const uint16_t y, const uint16_t w)
         }
 	}
     lcd_mem_write_end();
-}
-
-// Basic functionality
-
-void lcd_init() {
-	//disable jtag
-	MCUCR |= _BV(JTD);
-	MCUCR |= _BV(JTD);
-
-	CTRL_DDR = 0x7F;
-	DATA_DDR = 0xFF;
-
-	//perform reset
-	lcd_ctrl_lo(RESET);
-	_delay_ms(50);
-	lcd_ctrl_hi(RESET);
-	_delay_ms(50);
-
-	//set default pin values
-	lcd_ctrl_hi(WR);
-	lcd_ctrl_hi(RD);
-	lcd_ctrl_hi(RS);
-	lcd_ctrl_hi(VSYNC);
-	lcd_ctrl_hi(FMARK);
-	lcd_ctrl_lo(CS);
-
-	lcd_cmd_w(LCD_DISPLAY_OFF);
-	//exit sleep
-	lcd_cmd_w(LCD_SLEEP_OUT);
-	_delay_ms(5); //wait for sleep out to finish
-
-	// ----- setup preferences -----
-
-	//set orientation
-	lcd_cmd_w(LCD_MEMORY_ACCESS_CONTROL);
-	lcd_data_w(0x48);
-
-	//set color depth to 16 bit {REG 3A : DBI[2:0] = 0b101}
-	lcd_cmd_w(LCD_PIXEL_FORMAT_SET);
-	lcd_data_w(0x55);
-
-	//clear display
-	lcd_clear();
-
-	//turn on display after reset
-	lcd_cmd_w(LCD_DISPLAY_ON);
-	_delay_ms(20);
-	
-	//enable backlight
-	lcd_ctrl_hi(BLC);
 }
