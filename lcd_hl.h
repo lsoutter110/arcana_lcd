@@ -60,7 +60,7 @@ void lcd_draw_pgmmask_bg(const Mask mask, const uint8_t x, const uint16_t y, con
 
 // Text functions
 void lcd_write_char(const PGMFont font, const char c, const uint8_t x, const uint16_t y, const uint16_t col, const uint16_t bg);
-void lcd_write_str(const PGMFont font, char *str, const uint8_t x, const uint16_t y, const uint16_t col, const uint16_t bg);
+uint8_t lcd_write_str(const PGMFont font, char *str, const uint8_t x1, const uint16_t y1, const uint8_t x2, const uint16_t y2, const uint16_t col, const uint16_t bg);
 
 // Misc
 void lcd_draw_rgb_triangle(const uint16_t x, const uint16_t y, const uint16_t w);

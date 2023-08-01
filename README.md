@@ -39,3 +39,9 @@ To use the library in a project, clone the repository and run `make` to generate
 `void lcd_draw_pgmsprite_scale(sprite, x, y, x_scale, y_scale)` - Draws a `PGMSprite` to the display at `(x, y)`, scaled by the provided scale factors.
 
 `void lcd_draw_rgb_triangle(x, y, w)` - Draws a 'colour test triange' of width/height `w` at `(x, y)`. 
+
+### Text
+
+`void lcd_write_char(font, c, x, y, col, bg)` - Writes a character to the display at `(x, y)`
+
+`uint8_t lcd_write_str(font, str, x1, y1, x2, y2, col, bg)` - Writes a string to the display beginning at `(x1, y1)`. Begins a new line if text reaches `x2` or `\n` enountered, and exits if `y2` encountered. Returns `0` if successful, `1` if unsuccessful in writing the entire string.
