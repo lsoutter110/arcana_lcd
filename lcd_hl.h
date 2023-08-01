@@ -22,10 +22,19 @@ typedef struct {
 } Mask;
 
 typedef struct {
-    PGM_P *data;
+    PGM_P data;
     uint8_t w;
     uint16_t h;
 } PGMMask;
+
+typedef struct {
+    PGM_P data;
+    uint8_t char_offset;
+    uint8_t w;
+    uint8_t h;
+    uint8_t x_space;
+    uint8_t y_space;
+} PGMFont;
 
 // initialisation
 void lcd_init();
@@ -48,6 +57,10 @@ void lcd_draw_mask(const Mask mask, const uint8_t x, const uint16_t y, const uin
 void lcd_draw_mask_bg(const Mask mask, const uint8_t x, const uint16_t y, const uint16_t col1, const uint16_t col0);
 void lcd_draw_pgmmask(const Mask mask, const uint8_t x, const uint16_t y, const uint16_t col);
 void lcd_draw_pgmmask_bg(const Mask mask, const uint8_t x, const uint16_t y, const uint16_t col1, const uint16_t col0);
+
+// Text functions
+void lcd_write_char(const PGMFont font, const char c, const uint8_t x, const uint16_t y, const uint16_t col, const uint16_t bg);
+void lcd_write_str(const PGMFont font, char *str, const uint8_t x, const uint16_t y, const uint16_t col, const uint16_t bg);
 
 // Misc
 void lcd_draw_rgb_triangle(const uint16_t x, const uint16_t y, const uint16_t w);

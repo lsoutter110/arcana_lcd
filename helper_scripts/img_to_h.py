@@ -4,7 +4,6 @@ from numpy import asarray
 
 file_base = """\
 #include <avr/pgmspace.h>
-extern PGMSprite;
 """
 sprite_base = """
 const uint8_t {sprite_data_name}[] PROGMEM = {{{sprite_data}
