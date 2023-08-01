@@ -18,6 +18,8 @@ A sprite stores a width, height, and a pointer to the display data in RAM (store
 
 A sprite stores a width, height, and a pointer to the display data in **program memory** (stored in 16 bit colour). The display data should be `2*width*height` bytes long. A python script is provided to convert images into `PGMSprite`s.
 
+### Drawing Functions
+
 `void lcd_init()`
 
 Initialises and clears the display.
