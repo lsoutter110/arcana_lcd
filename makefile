@@ -1,4 +1,4 @@
-objects = lcd_draw.o lcd_text.o lcd_sprite.o lcd_misc.o
+objects = lcd_draw.o lcd_text.o lcd_sprite.o lcd_mask.o lcd_misc.o
 
 CC = avr-gcc
 CFLAGS = -mmcu=atmega644p -DF_CPU=12000000 -Os

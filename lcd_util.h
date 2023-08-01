@@ -88,6 +88,7 @@ enum {
 
 #define LCD_HEIGHT 320
 #define LCD_WIDTH 240
+#define LCD_BG_COL 0x0000
 
 #define lcd_cmd_w(cmd) \
 { \
