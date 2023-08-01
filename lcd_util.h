@@ -31,8 +31,8 @@ enum {
 };
 
 //Display control instructions
-#define lcd_ctrl_lo(pin)	CTRL_PORT &= ~_BV(pin)
-#define lcd_ctrl_hi(pin)	CTRL_PORT |= _BV(pin)
+#define lcd_ctrl_lo(pin) CTRL_PORT &= ~_BV(pin)
+#define lcd_ctrl_hi(pin) CTRL_PORT |= _BV(pin)
 
 // Basic Commands
 enum {
