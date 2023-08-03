@@ -53,10 +53,10 @@ void lcd_draw_sprite_scale(const Sprite sprite, const uint8_t x, const uint16_t 
 void lcd_draw_pgmsprite_scale(const PGMSprite sprite, const uint8_t x, const uint16_t y, const uint8_t x_scale, const uint8_t y_scale);
 
 // Mask functions
-void lcd_draw_mask(const Mask mask, const uint8_t x, const uint16_t y, const uint16_t col, const uint16_t bg);
-void lcd_draw_pgmmask(const PGMMask mask, const uint8_t x, const uint16_t y, const uint16_t col, const uint16_t bg);
-void lcd_draw_mask_scale(const Mask mask, const uint8_t x, const uint16_t y, const uint16_t col, const uint16_t bg, const uint8_t x_scale, const uint16_t y_scale);
-void lcd_draw_pgmmask_scale(const PGMMask mask, const uint8_t x, const uint16_t y, const uint16_t col, const uint16_t bg, const uint8_t x_scale, const uint16_t y_scale);
+void lcd_draw_mask(const Mask mask, const uint8_t x, const uint16_t y, const uint16_t col1, const uint16_t col0);
+void lcd_draw_pgmmask(const PGMMask mask, const uint8_t x, const uint16_t y, const uint16_t col1, const uint16_t col0);
+void lcd_draw_mask_scale(const Mask mask, const uint8_t x, const uint16_t y, const uint16_t col1, const uint16_t col0, const uint8_t x_scale, const uint16_t y_scale);
+void lcd_draw_pgmmask_scale(const PGMMask mask, const uint8_t x, const uint16_t y, const uint16_t col1, const uint16_t col0, const uint8_t x_scale, const uint16_t y_scale);
 
 // Text functions
 void lcd_write_char(const PGMFont font, const char c, const uint8_t x, const uint16_t y, const uint16_t col, const uint16_t bg);
