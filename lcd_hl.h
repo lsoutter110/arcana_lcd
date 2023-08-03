@@ -64,3 +64,4 @@ uint8_t lcd_write_str(const PGMFont font, const char *str, const uint8_t x1, con
 
 // Misc
 void lcd_draw_rgb_triangle(const uint16_t x, const uint16_t y, const uint16_t w);
+static inline uint16_t rgb_to_u16(const uint8_t r, const uint8_t g, const uint8_t b) { return (r<<8)&0xF800 | (g<<3)&0x07E0 | (b>>3); }
