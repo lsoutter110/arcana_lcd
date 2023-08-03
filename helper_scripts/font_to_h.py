@@ -39,7 +39,7 @@ def main():
             for yr in range(y, y+h):
                 for xr in range(x, x+w):
                     if(any(img_arr[yr][xr])):
-                        buf = buf | 1<<bufi
+                        buf |= 1<<bufi
                     bufi -= 1
                     if(bufi < 0):
                         font_data += f"{buf:#0{4}x},"

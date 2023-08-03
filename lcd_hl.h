@@ -23,15 +23,15 @@ typedef struct {
 
 typedef struct {
     PGM_P data;
-    uint8_t w;
-    uint16_t h;
+    const uint8_t w;
+    const uint16_t h;
 } PGMMask;
 
 typedef struct {
     PGM_P data;
-    uint8_t char_offset;
-    uint8_t w;
-    uint8_t h;
+    const uint8_t char_offset;
+    const uint8_t w;
+    const uint8_t h;
     uint8_t x_space;
     uint8_t y_space;
 } PGMFont;
@@ -53,10 +53,8 @@ void lcd_draw_sprite_scale(const Sprite sprite, const uint8_t x, const uint16_t 
 void lcd_draw_pgmsprite_scale(const PGMSprite sprite, const uint8_t x, const uint16_t y, const uint8_t x_scale, const uint8_t y_scale);
 
 // Mask functions
-void lcd_draw_mask(const Mask mask, const uint8_t x, const uint16_t y, const uint16_t col);
-void lcd_draw_mask_bg(const Mask mask, const uint8_t x, const uint16_t y, const uint16_t col1, const uint16_t col0);
-void lcd_draw_pgmmask(const Mask mask, const uint8_t x, const uint16_t y, const uint16_t col);
-void lcd_draw_pgmmask_bg(const Mask mask, const uint8_t x, const uint16_t y, const uint16_t col1, const uint16_t col0);
+void lcd_draw_mask(const Mask mask, const uint8_t x, const uint16_t y, const uint16_t col, const uint16_t bg);
+void lcd_draw_pgmmask(const PGMMask mask, const uint8_t x, const uint16_t y, const uint16_t col, const uint16_t bg);
 
 // Text functions
 void lcd_write_char(const PGMFont font, const char c, const uint8_t x, const uint16_t y, const uint16_t col, const uint16_t bg);
