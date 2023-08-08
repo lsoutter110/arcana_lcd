@@ -44,7 +44,7 @@ void lcd_clear();
 void lcd_draw_hline(const uint8_t x1, const uint16_t y1, const uint8_t x2, const uint16_t col);
 void lcd_draw_vline(const uint8_t x1, const uint16_t y1, const uint16_t y2, const uint16_t col);
 void lcd_draw_rect_fill(const uint8_t x1, const uint16_t y1, const uint8_t x2, const uint16_t y2, const uint16_t col);
-void draw_line(const int16_t x1, const int16_t y1, const int16_t x2, const int16_t y2, const uint16_t col);
+void lcd_draw_line(const int16_t x1, const int16_t y1, const int16_t x2, const int16_t y2, const uint16_t col);
 
 // Sprite functions
 void lcd_draw_sprite(const Sprite sprite, const uint8_t x, const uint16_t y);
